@@ -7,7 +7,22 @@
   <title>Document</title>
   <script src="./wasm_emscripten.js"></script>
   <script>
-    Module._callJS();
+    // Module._callJS();
+    // Module.addInitializationCb(function() {
+    //   console.log('加载完成 Module', Module);
+    //   console.log(Module._getNum());
+    // });
+    function r() {
+      console.log('加载完成 Module', Module);
+      console.log(Module._getNum());
+    }
+    if (Module.isInitialized()) {
+      r();
+    } else {
+      Module.addInitializationCb(function() {
+        r();
+      });
+    }
   </script>
 </head>
 <body>

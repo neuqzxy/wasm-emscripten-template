@@ -3,10 +3,12 @@
   "version": "1.0.0",
   "main": "index.js",
   "repository": "git@github.com:neuqzxy/wasm-emscripten-template.git",
-  "author": "zhouxinyu <1843605478@qq.com>",
+  "author": "zhouxinyu <zhouxinyu12138@gmail.com>",
   "license": "MIT",
   "scripts": {
     "init": "sh ./install.sh",
-    "build-wasm": "sh ./build/build-wasm.sh"
+    "build-wasm": "export WASM_OUT=1 && sh ./build/build-wasm.sh",
+    "build-asm": "export WASM_OUT=0 && export ASYNC_LOAD=0 && sh ./build/build-wasm.sh",
+    "build-asm-async": "export WASM_OUT=0 && export ASYNC_LOAD=1 && sh ./build/build-wasm.sh"
   }
 }

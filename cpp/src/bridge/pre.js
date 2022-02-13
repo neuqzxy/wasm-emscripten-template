@@ -4,7 +4,7 @@
 // }
 
 Module.onRuntimeInitialized = function() {
-  console.log('def');
+  console.log('onRuntimeInitialized');
   Module.initialized = true
 }
 
