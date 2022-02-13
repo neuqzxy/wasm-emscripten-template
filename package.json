@@ -1,0 +1,12 @@
+{
+  "name": "wasm-emscripten-template",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:neuqzxy/wasm-emscripten-template.git",
+  "author": "zhouxinyu <1843605478@qq.com>",
+  "license": "MIT",
+  "scripts": {
+    "init": "sh ./install.sh",
+    "build-wasm": "sh ./build/build-wasm.sh"
+  }
+}
