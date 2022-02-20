@@ -3,12 +3,14 @@
 //     initialized: false
 // }
 
-Module.onRuntimeInitialized = function() {
+Module.initialized = false;
+
+function onRuntimeInitialized() {
   console.log('onRuntimeInitialized');
-  Module.initialized = true
+  Module.initialized = true;
 }
 
-Module.onRuntimeFailed = function() {
+function onRuntimeFailed() {
   Module.initialized = false;
 }
 
@@ -21,13 +23,13 @@ function addFailCb(callback) {
 }
 
 function addInitializationCb(callback) {
-  let prev_callback = Module.onRuntimeInitialized
+  let prev_callback = Module.onRuntimeInitialized;
   Module.onRuntimeInitialized = function() {
-    prev_callback()
-    callback()
+    prev_callback();
+    callback();
   }
 }
 
 function isInitialized() {
-  return Module.initialized
+  return Module.initialized;
 }

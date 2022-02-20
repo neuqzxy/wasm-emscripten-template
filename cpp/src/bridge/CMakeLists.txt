@@ -20,13 +20,14 @@ if (CMAKE_SYSTEM_NAME STREQUAL Emscripten)
     # ENVIRONMENT=web只在web环境中执行，避免引入require
     # NO_DISABLE_EXCEPTION_CATCHING用于debug
     # ASSERTIONS 用于debug
+    # closure 用于代码混淆
     # WASM_ASYNC_COMPILATION 控制是否异步加载asm.js
     # PTHREAD_POOL_SIZE这是设置线程池的数量，如果不设置的话会开线程阻塞会直接阻塞主线程
     # 正式版本请使用-03优化
     add_executable(wasm_emscripten bridge.cpp)
     target_link_libraries(wasm_emscripten core)
     set_target_properties(wasm_emscripten PROPERTIES
-            LINK_FLAGS "-O1                 \
+            LINK_FLAGS "-O3                \
         -s EXPORTED_FUNCTIONS='[         \
             \"_getNum\",         \
             \"_malloc\",         \
@@ -41,7 +42,9 @@ if (CMAKE_SYSTEM_NAME STREQUAL Emscripten)
         --js-library ${CMAKE_CURRENT_LIST_DIR}/library.js \
         --pre-js ${CMAKE_CURRENT_LIST_DIR}/pre.js \
         --post-js ${CMAKE_CURRENT_LIST_DIR}/post.js\
-        --closure 0\
+        --closure 1\
+        -s MODULARIZE=1 \
+        -s 'EXPORT_NAME=\"createModule\"' \
         -s WASM=${WASM} \
         -s WASM_ASYNC_COMPILATION=${ASYNC_LOAD} \
         -s FILESYSTEM=0 \

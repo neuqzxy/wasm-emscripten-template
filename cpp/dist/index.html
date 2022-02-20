@@ -12,17 +12,22 @@
     //   console.log('加载完成 Module', Module);
     //   console.log(Module._getNum());
     // });
-    function r() {
-      console.log('加载完成 Module', Module);
-      console.log(Module._getNum());
-    }
-    if (Module.isInitialized()) {
-      r();
-    } else {
-      Module.addInitializationCb(function() {
+    createModule().then(Module => {
+      function r() {
+        console.log('加载完成 Module', Module);
+        console.log(Module._getNum());
+      }
+      if (Module.isInitialized()) {
+        // console.log('同步');
         r();
-      });
-    }
+      } else {
+        console.error('加载wasm发生错误')
+        // Module.addInitializationCb(function() {
+        //   console.log('异步');
+        //   r();
+        // });
+      }
+    })
   </script>
 </head>
 <body>
