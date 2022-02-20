@@ -14,8 +14,8 @@ endif()
 #SET(WASM 0)
 #SET(ASYNC_LOAD 1)
 if (CMAKE_SYSTEM_NAME STREQUAL Emscripten)
-    SET(SYNC_LOAD ${WASM})
-    MESSAGE(abc${WASM})
+    MESSAGE(wasm: ${WASM})
+    MESSAGE(ASYNC_LOAD: ${ASYNC_LOAD})
     # DISABLE_EXCEPTION_CATCHING 是否禁用异常精确判断（如果不禁用0会增加100多k代码量）
     # ENVIRONMENT=web只在web环境中执行，避免引入require
     # NO_DISABLE_EXCEPTION_CATCHING用于debug
